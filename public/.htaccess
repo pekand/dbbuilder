@@ -1,0 +1,30 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteBase /
+
+#php_flag magic_quotes_gpc Off
+#php_value magic_quotes_gpc Off
+
+# zakazanie systemovych koncoviek
+<FilesMatch "\.(db|sql|txt|html|tmp|old|inst)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+# presmerovanie neexistujucich urliek
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*?)\1$
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+#Error pages
+# 400 - Bad request
+ErrorDocument 400 /index.php?url=/error/400
+# 401 - Authorization Required
+ErrorDocument 401 /index.php?url=/error/401
+# 403 - Forbidden directory
+ErrorDocument 403 /index.php?url=/error/403
+# 404 - Page not found
+ErrorDocument 404 /index.php?url=/error/404
+# 500 - Internal Server Error
+ErrorDocument 500 /index.php?url=/error/500

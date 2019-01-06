@@ -2,6 +2,8 @@
 
 namespace Core\Router;
 
+use Core\Services\Services;
+
 class Router {
     private $routes = [];
     private $middlewares = [];
@@ -9,16 +11,9 @@ class Router {
     private $uri = null;
     private $method = '';
     
-    public function __construct($uri=null, $method=null) {
-        $this->uri = $uri;
-        $this->method = $method;
-        if(empty($uri)) {
-            $this->uri = trim(strtok(@$_SERVER['REQUEST_URI'],'?')??"/");
-        }
-        
-        if(empty($method)) {
-            $this->method=@$_SERVER['REQUEST_METHOD']??'GET'; 
-        }
+    public function __construct() {
+        $this->uri = Services::Request()->uri();
+        $this->method = Services::Request()->method();
     }
     
     public function route($uri, $callback=null, $method='GET') {
@@ -86,7 +81,7 @@ class Router {
         
         $result = false;
         foreach ($this->middlewares as $middleware) {
-            if ($middleware['uri'] == substr( $this->uri, 0, strlen($middleware['uri']))) {
+            if ($middleware['uri'] == substr($this->uri, 0, strlen($middleware['uri']))) {
                 $result = call_user_func_array($middleware['callback'], []);
                 if ($result !== true) {
                     $this->display($result);

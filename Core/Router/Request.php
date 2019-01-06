@@ -22,4 +22,18 @@ class Request {
 		
 		return null;
 	}
+	
+	public function uri() {
+		if (!empty($_SERVER['REQUEST_URI'])) {
+			return  trim(strtok($_SERVER['REQUEST_URI'],'?')??"/");
+		}
+		return null;
+	}
+	
+	public function method() {
+		if (!empty($_SERVER['REQUEST_METHOD'])) {
+			return  @$_SERVER['REQUEST_METHOD']??'GET'; 
+		}
+		return null;
+	}
 }

@@ -6,14 +6,17 @@ use Core\Services\Services;
 $router->middleware("/admin", function(){
 	$auth = Services::Auth();
 	
-	$username = Services::Request()->post('username');
-	$password = Services::Request()->post('password');
-		
-	if (!empty($username)) {
-		if($auth->login($username, $password)) {
-			return true;
+	if(!$auth->is('admin')) {
+		$username = Services::Request()->post('username');
+		$password = Services::Request()->post('password');
+			
+		if (!empty($username)) {
+			if($auth->login($username, $password)) {
+				header("Location: ".Services::Request()->uri());
+				return null;
+			}
 		}
-	}		
+	}
 		
 	if(!$auth->is('admin')) {
 		$page = Services::Template();

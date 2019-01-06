@@ -68,15 +68,7 @@ class Router {
         });
 
         foreach ($this->routes as &$route) {
-            echo $route['uri']."\n";
-        }
-
-        foreach ($this->routes as &$route) {
            $route['uri'] = str_replace('~','*',$route['uri']);
-        }
-
-        foreach ($this->routes as &$route) {
-            echo $route['uri']."\n";
         }
 
         foreach ($this->routes as $route) {

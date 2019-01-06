@@ -10,11 +10,16 @@ $router->get("/debug/phpinfo", function(){
 	phpinfo();
 });
 
+$router->get("/debug/routes", function(){
+	global $router;
+	$routes = $router->getAllRoutes();
+	
+	var_dump($routes);
+});
+
 $router->get("/debug/test/:id/abc/:test/*", function($id, $test){
 	return "xxx".$id.$test;
 });
-
-
 
 $router->get("/debug/abc/*", function($rest){
 	return "all".$rest;

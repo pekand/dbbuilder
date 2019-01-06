@@ -55,6 +55,16 @@ class Router {
         $this->route($uri, $callback, 'DELETE');
     }
 
+    public function getAllRoutes() { 
+        $routes = [];
+        
+        foreach ($this->routes as &$route) {
+           $routes[] = $route['uri'];
+        }
+        
+        return $routes;
+    }
+    
     public function execute() { 
         
         // move default to bottom
@@ -63,8 +73,7 @@ class Router {
         }
         
         usort($this->routes,  function ($r1, $r2) {
-            $x = strcmp($r1['uri'], $r2['uri']);
-            return $x;
+            return strcmp($r1['uri'], $r2['uri']);
         });
 
         foreach ($this->routes as &$route) {

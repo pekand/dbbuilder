@@ -9,6 +9,7 @@ use Core\Db\Sqlite;
 use Core\Auth\Auth;
 use Core\Auth\UserManager;
 use Core\Template\Template;
+use Core\Router\Request;
 
 class Services
 {
@@ -17,6 +18,7 @@ class Services
     private static $userManager = null;
     private static $auth = null;
     private static $template = null;
+    private static $request = null;
 
     public function __construct($templatesPath)
     {
@@ -83,5 +85,17 @@ class Services
         self::$template = new Template($templatesPath);
 
         return self::$template;
+    }
+    
+    public static function Request()
+    {
+        if (!empty(self::$request)) {
+            return self::$request;
+        }
+
+
+        self::$request = new Request();
+
+        return self::$request;
     }
 }

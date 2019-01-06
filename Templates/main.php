@@ -2,7 +2,7 @@
 
 
 $this->blockStart("body");
-echo "xxxx123";
+echo "hello";
 $this->blockEnd("body");
 
 $this->extend("layout");

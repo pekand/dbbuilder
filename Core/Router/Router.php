@@ -4,6 +4,7 @@ namespace Core\Router;
 
 class Router {
     private $routes = [];
+    private $middlewares = [];
     
     private $uri = null;
     private $method = '';
@@ -12,13 +13,14 @@ class Router {
         $this->uri = $uri;
         $this->method = $method;
         if(empty($uri)) {
-            $this->uri = strtok(@$_SERVER['REQUEST_URI'],'?')??"/";
+            $this->uri = trim(strtok(@$_SERVER['REQUEST_URI'],'?')??"/");
         }
         
         if(empty($method)) {
             $this->method=@$_SERVER['REQUEST_METHOD']??'GET'; 
         }
     }
+    
     public function route($uri, $callback=null, $method='GET') {
         
         $route = [
@@ -28,6 +30,17 @@ class Router {
         ];
 
         $this->routes[] = $route;
+    }
+    
+    public function middleware($uri, $callback=null, $method='GET') {
+        
+        $middleware = [
+            'uri' => trim($uri),
+            'callback' => $callback,
+            'method' => $method
+        ];
+
+        $this->middlewares[] = $middleware;
     }
 
     public function display($content) {
@@ -67,13 +80,28 @@ class Router {
     
     public function execute() { 
         
+        usort($this->middlewares,  function ($a, $b) {
+            return strcmp($a['uri'], $b['uri']);
+        });
+        
+        $result = false;
+        foreach ($this->middlewares as $middleware) {
+            if ($middleware['uri'] == substr( $this->uri, 0, strlen($middleware['uri']))) {
+                $result = call_user_func_array($middleware['callback'], []);
+                if ($result !== true) {
+                    $this->display($result);
+                    return;
+                }
+            }
+        }
+
         // move default to bottom
         foreach ($this->routes as &$route) {
            $route['uri'] = str_replace('*','~',$route['uri']);
         }
         
-        usort($this->routes,  function ($r1, $r2) {
-            return strcmp($r1['uri'], $r2['uri']);
+        usort($this->routes,  function ($a, $b) {
+            return strcmp($a['uri'], $b['uri']);
         });
 
         foreach ($this->routes as &$route) {

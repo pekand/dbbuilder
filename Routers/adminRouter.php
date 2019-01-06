@@ -17,7 +17,6 @@ $router->get("/admin/db/test", function(){
 	return "create table test";
 });
 
-
 // create test user in users table with user manager
 $router->get("/admin/db/user", function(){
 	$userManager = Services::UserManager();
@@ -41,7 +40,7 @@ $router->get("/admin/db/auth", function() {
 
 	// create new user
 	$auth = Services::Auth();
-	$auth->createUser('root', 'password');
+	$auth->createUser('root', 'password', ['admin'], ['all']);
 
 	// list table users
 	$db = Services::Db();

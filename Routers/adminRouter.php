@@ -6,7 +6,7 @@ use Core\Db\SchemaBuilder;
 $router->get("/admin/db/test", function(){
 	$db = Services::Db();
 	$db->drop('temp');
-		
+	
 	
 
 	//$db->drop('test');

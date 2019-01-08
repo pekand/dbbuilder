@@ -44,7 +44,8 @@ $router->post("/login", function(){
 		return $page->render("login", []);
 	}
 	
-	return 'ok';
+	header("Location: /");
+	return ;
 });
 
 // logout user

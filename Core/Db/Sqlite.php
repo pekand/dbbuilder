@@ -103,6 +103,26 @@ class Sqlite {
     }
 
     public function schema() {
+        $tables = $this->get("SELECT name FROM sqlite_master WHERE type='table';");
+
+        $data = [];
+        foreach ($tables as $table) {
+            
+            if ('sqlite_sequence'  == $table['name']) {
+                continue;
+            }
+            
+            $item = $this->get("PRAGMA table_info(".$table['name'].");");
+            $data[$table['name']] = $item;
+        }
+        
+        return $data;
+        
+        
+        
+    }
+    
+    public function definitions() {
         return $this->get("SELECT * FROM `sqlite_master` WHERE type='table';");
     }
 

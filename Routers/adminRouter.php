@@ -93,14 +93,3 @@ $router->post("/admin/db/console/query", function(){
 	return json_encode(["test"=>$result]);
 });
 
-// update database with schema
-$router->get("/admin/db/builder", function() {
-	echo "<pre>";
-	$db = Services::Db();
-	$schema = new SchemaBuilder($db, "db/schema.json");
-	$schema->build();
-
-	print_r($db->list());
-
-	return "";
-});

@@ -73,7 +73,29 @@ class Router {
         return $routes;
     }
     
-    public function execute() { 
+    public function load() {
+        $router = $this;
+
+        foreach (array_filter(glob(ROOT_PATH . '/App/*'), 'is_dir') as $module) {
+            $path = $module . '/Routers/*Router.php';
+
+            foreach (glob($path) as $routerFile) {
+                include $routerFile;
+            }
+        }        
+    }
+    
+    public function execute($method = null, $uri = null) { 
+        
+        if(empty($method)) {
+            $method =  $this->method;
+        }
+        
+        if(empty($uri)) {
+            $uri =  $this->uri;
+        }
+        
+        
         
         usort($this->middlewares,  function ($a, $b) {
             return strcmp($a['uri'], $b['uri']);
@@ -81,7 +103,7 @@ class Router {
         
         $result = false;
         foreach ($this->middlewares as $middleware) {
-            if ($middleware['uri'] == substr($this->uri, 0, strlen($middleware['uri']))) {
+            if ($middleware['uri'] == substr($uri, 0, strlen($middleware['uri']))) {
                 $result = call_user_func_array($middleware['callback'], []);
                 if ($result !== true) {
                     $this->display($result);
@@ -104,12 +126,12 @@ class Router {
         }
 
         foreach ($this->routes as $route) {
-            if ($this->method != $route['method']) continue;
+            if ($method != $route['method']) continue;
             $uri_pattern = str_replace('/', '\/', $route['uri']);
             $uri_pattern = str_replace('*', '(.*)', $uri_pattern);
             $uri_pattern = preg_replace("/:([^:\/\\\\]+)/", "([^\/]+)", $uri_pattern);
             $uri_pattern = '/^'.$uri_pattern.'\/?$/';
-            if(preg_match($uri_pattern, $this->uri, $matches) !== 0) {
+            if(preg_match($uri_pattern, $uri, $matches) !== 0) {
                 unset($matches[0]);
                 $response = call_user_func_array($route['callback'], $matches);
                 $this->display($response);

@@ -111,33 +111,3 @@
             return;
         }
     }
-/*    
-$auth = new Auth();
-
-$auth->createUser('admin', 'admin', array('admin', 'user')); 
-
-$auth->login('admin', 'admin');
-
-if ($auth->is('admin')) {
-    $auth->createUser('user1', 'password123', array('user'), array('action1'));    
-    $auth->addRole('user1', 'logged');
-    $auth->addRight('user1', 'action2');
-}
-
-$users = $auth->getAllUsers();
-var_dump($users);
-
-$auth->logout();
-
-$auth->login('user1', 'password123');
-
-if ($auth->is('user')) {
-    echo "hi\n";
-}
-
-if ($auth->has('action1')) {
-    echo "tu\n";
-}
-
-echo "hmm\n";
-*/

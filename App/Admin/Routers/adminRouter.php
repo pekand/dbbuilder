@@ -69,27 +69,3 @@ $router->get("/admin/db/list", function() {
 	print_r($db->list());
 });
 
-// render template dbconsole
-$router->get("/admin/db/console", function(){
-	$page = Services::Template();
-	return $page->render("dbconsole", []);
-});
-
-// execute query in database
-$router->post("/admin/db/console/query", function(){
-	$query = Services::Request()->post('query');
-
-	$db = Services::Db();
-
-	$result = null;
-
-	try {
-		$result = $db->get($query);
-	} catch (Exception $e) {
-		var_dump($e);
-	}
-
-	header('Content-Type: application/json');
-	return json_encode(["test"=>$result]);
-});
-

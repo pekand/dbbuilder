@@ -1,0 +1,11 @@
+{
+	"autoload": {
+        "psr-0": {
+            "App": "",
+            "Core": ""
+        }
+    },
+    "require": {
+    	"phpmailer/phpmailer": "*"
+    }
+}

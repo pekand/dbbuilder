@@ -1,0 +1,46 @@
+{
+  "name": "layout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "*",
+    "requirejs": "*",
+    "bootstrap": "*",
+    "modernizr": "*",
+    "moment": "*",
+    "font-awesome": "*",
+    "jquery": "*",
+    "jquery-ui": "*"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "*",
+    "browser-sync": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-cache": "*",
+    "gulp-concat": "*",
+    "gulp-cssnano": "*",
+    "gulp-ext-replace": "*",
+    "gulp-filter": "*",
+    "gulp-htmlmin": "*",
+    "gulp-if": "^*",
+    "gulp-imagemin": "*",
+    "gulp-merge": "*",
+    "gulp-print": "*",
+    "gulp-replace": "*",
+    "gulp-sass": "*",
+    "gulp-sequence": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-twig": "*",
+    "gulp-uglify": "*",
+    "gulp-useref": "*",
+    "merge-stream": "*",
+    "minimist": "^*"
+  }
+}

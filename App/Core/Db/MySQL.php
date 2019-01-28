@@ -112,6 +112,10 @@ class MySQL {
         $this->exec("DROP TABLE IF EXISTS `$table`;");
     } 
     
+    public function use($dbname) { 
+        $this->exec("use `$dbname`;");
+    }
+    
     public function schema() { 
         
         $data = [];

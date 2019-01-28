@@ -1,8 +1,7 @@
 <?php
 
 // render assets file
-$router->get("/assets/*", function($path){
-
+$router->get("/assets/*", function($app, $path){   
     $found = false;
     foreach (array_filter(glob(ROOT_PATH . '/App/*'), 'is_dir') as $module) {
         $assetsPath = $module . '/Assets/';

@@ -2,11 +2,11 @@
 
 use Core\Services\Services;
 
-$router->get("/", function(){
-	$page = Services::Template();
+$app->router->get("/", function($app) {
+	$page = $app->services->get('template');
 	return $page->render("main", ['title' => 'Main']);
 });
 
-$router->get("*", function(){
+$app->router->get("*", function($app, $all) {
 	return "not found";
 });

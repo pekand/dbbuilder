@@ -1,15 +1,14 @@
 <?php
 
-use Core\Services\Services;
-use Core\Db\SchemaBuilder;
+
 
 // update database with schema
-$router->get("/admin/db/builder", function() {
+$router->get("/admin/db/builder", function($app) {
 	echo "<pre>";
-	$db = Services::Db();
-	$schema = new SchemaBuilder($db, "db/schema.json");
+	$schem = $app->get('schemabuilder');
 	$schema->build();
 
+	$db = $app->get('db');
 	print_r($db->schema());
 	print_r($db->list());		
 
@@ -17,13 +16,12 @@ $router->get("/admin/db/builder", function() {
 });
 
 // query
-$router->get("/admin/db/query", function() {
+$router->get("/admin/db/query", function($app) {
 	echo "<pre>";
-	$db = Services::Db();
+	$db = $app->get('db');
 	print_r($db->list());		
 	print_r($db->schema());		
 	print_r($db->definitions());
-	
 
 	return "";
 });

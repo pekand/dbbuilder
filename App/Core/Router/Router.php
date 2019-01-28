@@ -2,18 +2,20 @@
 
 namespace Core\Router;
 
-use Core\Services\Services;
-
 class Router {
+    private $app = null;
     private $routes = [];
     private $middlewares = [];
     
     private $uri = null;
     private $method = '';
     
-    public function __construct() {
-        $this->uri = Services::Request()->uri();
-        $this->method = Services::Request()->method();
+    public $urlparams = [];
+    
+    public function __construct($app) {
+        $this->app = $app;
+        $this->uri = $this->app->services->get('request')->uri();
+        $this->method = $this->app->services->get('request')->method();
     }
     
     public function route($uri, $callback=null, $method='GET') {
@@ -74,7 +76,9 @@ class Router {
     }
     
     public function load() {
-        $router = $this;
+        $app = $this->app;
+        $router = $this->app->router;
+        $services = $this->app->services;
 
         foreach (array_filter(glob(ROOT_PATH . '/App/*'), 'is_dir') as $module) {
             $path = $module . '/Routers/*Router.php';
@@ -86,6 +90,7 @@ class Router {
     }
     
     public function execute($method = null, $uri = null) { 
+        global $services;
         
         if(empty($method)) {
             $method =  $this->method;
@@ -95,8 +100,6 @@ class Router {
             $uri =  $this->uri;
         }
         
-        
-        
         usort($this->middlewares,  function ($a, $b) {
             return strcmp($a['uri'], $b['uri']);
         });
@@ -104,7 +107,7 @@ class Router {
         $result = false;
         foreach ($this->middlewares as $middleware) {
             if ($middleware['uri'] == substr($uri, 0, strlen($middleware['uri']))) {
-                $result = call_user_func_array($middleware['callback'], []);
+                $result = call_user_func_array($middleware['callback'], [$this->app]);
                 if ($result !== true) {
                     $this->display($result);
                     return;
@@ -133,7 +136,8 @@ class Router {
             $uri_pattern = '/^'.$uri_pattern.'\/?$/';
             if(preg_match($uri_pattern, $uri, $matches) !== 0) {
                 unset($matches[0]);
-                $response = call_user_func_array($route['callback'], $matches);
+                $this->urlparams = $matches;
+                $response = call_user_func_array($route['callback'], array_merge([$this->app],$matches));
                 $this->display($response);
                 break;
             }

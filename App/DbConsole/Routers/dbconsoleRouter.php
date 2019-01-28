@@ -1,20 +1,16 @@
 <?php
 
-use Core\Services\Services;
-use DbConsole\DbConsole\DbConsole;
-
 // render template dbconsole
-$router->get("/admin/db/console", function(){
-	
-	$database = Services::Request()->get('database');
-	$query = Services::Request()->get('query');
+$router->get("/admin/db/console", function($app){
+	$database = $app->get('request')->get('database');
+	$query = $app->get('request')->get('query');
 
 	$result = null;
 	if (!empty($query)) {
 		$result = (new DbConsole())->processQuery($database, $query);
 	}
 		
-	return Services::Template()->render(
+	return $app->get('template')->render(
 		"dbconsole", 
 		[
 			'database' => $database,
@@ -25,14 +21,13 @@ $router->get("/admin/db/console", function(){
 });
 
 // execute query in database
-$router->post("/admin/db/console/query", function(){
-	
-	$database = Services::Request()->post('database');
-	$query = Services::Request()->post('query');
+$router->post("/admin/db/console/query", function($app){
+	$database = $app->get('request')->post('database');
+	$query = $app->get('request')->post('query');
 
 	$result = null;
 	if (!empty($query)) {
-		$result = (new DbConsole())->processQuery($database, $query);
+		$result = $app->get('dbconsole')->processQuery($database, $query);
 	}
 	
 	header('Content-Type: application/json');

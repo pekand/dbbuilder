@@ -1,11 +1,11 @@
 <?php
 
-use Core\Services\Services;
 use Core\Db\SchemaBuilder;
 
 // create test table
-$router->get("/admin/db/test", function(){
-	$db = Services::Db();
+$router->get("/admin/db/test", function($app){
+
+	$db = $app->get('db');
 
 	$db->drop('test');
 	$db->create('test');
@@ -18,8 +18,8 @@ $router->get("/admin/db/test", function(){
 });
 
 // create test user in users table with user manager
-$router->get("/admin/db/user", function(){
-	$userManager = Services::UserManager();
+$router->get("/admin/db/user", function($app) {
+	$userManager = $app->get('userManager');
 	$userManager->init();
 	$userManager->create('test', '123');
 	$user = $userManager->get('test');
@@ -27,23 +27,23 @@ $router->get("/admin/db/user", function(){
 	
 	//$userManager->remove('test');
 
-	$db = Services::Db();
+	$db = $app->get('db');
 	var_dump($db->list());
 });
 
-$router->get("/admin/db/auth", function() {
-	$session = Services::Session();
+$router->get("/admin/db/auth", function($app) {
+	$session = $app->get('session');
 
 	// drop and recreate users table
-	$userManager = Services::UserManager();
+	$userManager = $app->get('userManager');
 	$userManager->init();
 
 	// create new user
-	$auth = Services::Auth();
+	$auth = $app->get('auth');
 	$auth->createUser('root', 'password', ['admin'], ['all']);
 
 	// list table users
-	$db = Services::Db();
+	$db = $app->get('db');
 	var_dump($db->dump('users'));
 
 	echo "<pre>";
@@ -63,9 +63,9 @@ $router->get("/admin/db/auth", function() {
 });
 
 // displey whole database content
-$router->get("/admin/db/list", function() {
+$router->get("/admin/db/list", function($app) {
 	echo "<pre>";
-	$db = Services::Db();
+	$db = $app->get('db');
 	print_r($db->list());
 });
 

@@ -1,25 +1,24 @@
 <?php
 
-use Core\Services\Services;
-
 // create private zone
-$router->middleware("/admin", function(){
-	$auth = Services::Auth();
+$router->middleware("/admin", function($app){
+	
+	$auth = $app->get('auth');
 	
 	if(!$auth->is('admin')) {
-		$username = Services::Request()->post('username');
-		$password = Services::Request()->post('password');
+		$username = $app->get('request')->post('username');
+		$password = $app->get('request')->post('password');
 			
 		if (!empty($username)) {
 			if($auth->login($username, $password)) {
-				header("Location: ".Services::Request()->uri());
+				header("Location: ".$app->get('request')->uri());
 				return null;
 			}
 		}
 	}
 		
 	if(!$auth->is('admin')) {
-		$page = Services::Template();
+		$page = $app->get('template');
 		return $page->render("login", []);
 	}
 	
@@ -27,20 +26,19 @@ $router->middleware("/admin", function(){
 });
 
 // displey login page
-$router->get("/login", function(){
-	$page = Services::Template();
+$router->get("/login", function($app){
+	$page = $app->get('template');
 	return $page->render("login", []);
 });
 
 // proces login form
-$router->post("/login", function(){
-	
-	$username = Services::Request()->post('username');
-	$password = Services::Request()->post('password');
+$router->post("/login", function($app){
+	$username = $app->get('router')->post('username');
+	$password = $app->get('router')->post('password');
 		
-	$auth = Services::Auth();	
+	$auth = $app->get('auth');	
 	if(!$auth->login($username, $password)) {
-		$page = Services::Template();
+		$page = $app->get('template');
 		return $page->render("login", []);
 	}
 	
@@ -49,8 +47,8 @@ $router->post("/login", function(){
 });
 
 // logout user
-$router->get("/logout", function(){
-	$auth = Services::Auth();
+$router->get("/logout", function($app){	
+	$auth = $app->get('auth');
 	$auth->logout();
 	return json_encode(['ok']);
 });

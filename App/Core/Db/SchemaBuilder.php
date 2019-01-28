@@ -2,9 +2,6 @@
 
 namespace Core\Db;
 
-/**
- * 
- */
 class SchemaBuilder
 {
 

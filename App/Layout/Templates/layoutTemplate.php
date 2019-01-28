@@ -6,7 +6,7 @@
     <title><?php $this->blockInsert("title", "DbBuilder")?></title>
     <link rel='shortcut icon' type='image/x-icon' href='/assets/img/favicon.ico' />
 
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/assets/styles.css?<?php echo rand ( 1000000 , 9999999 );?>">
 	<script src="/assets/js/jquery.js"></script>
 	    
     <?php $this->blockInsert("style")?>
@@ -16,7 +16,7 @@
       
       <?php $this->blockInsert("body")?>
 
-      <script src="/assets/js/script.js"></script>
+      <script src="/assets/js/script.js?<?php echo rand ( 1000000 , 9999999 );?>"></script>
 
     <?php $this->blockInsert("scripts")?>
 

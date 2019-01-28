@@ -1,2 +1,3 @@
 pridat nacitavanie konfiguracie
 pridat rekurzivne prechadzanie modulov pre App adresar
+pridat do templatov moznost vytahovat servisi

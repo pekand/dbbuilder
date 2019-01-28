@@ -1,6 +1,5 @@
 <?php
 
-use Core\Config\Config;
 use Core\Session\Session;
 use Core\Db\Sqlite;
 use Core\Db\MySQL;
@@ -10,7 +9,8 @@ use Core\Template\Template;
 use Core\Router\Request;
 
 $services->add('db', function($app){
-    $dbPath = ROOT_PATH . Config::$db;
+    $dbPath = $app->get('config')->get('dbPath');
+    
     $db = new Sqlite();
     $db->open($dbPath);
 
@@ -44,9 +44,9 @@ $services->add('auth', function($app){
 });
 
 $services->add('template', function($app){
-    $templatesPath = ROOT_PATH . Config::$templates;
+    $templatesPath = $app->get('config')->get('templatesPath');
 
-    $template = new Template($templatesPath);
+    $template = new Template($app, $templatesPath);
 
     return $template;
 });
@@ -55,4 +55,8 @@ $services->add('request', function($app){
     $request = new Request();
     
     return $request;
+});
+
+$services->add('config', function($app){   
+    return $app->config;
 });

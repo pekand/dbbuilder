@@ -8,8 +8,9 @@ class Template
 
     private $templatesPath = "";
 
-    public function __construct($templatesPath)
+    public function __construct($app, $templatesPath)
     {
+        $this->app = $app;
         $this->templatesPath = $templatesPath;
     }
 
@@ -49,10 +50,13 @@ class Template
     {
         echo isset(self::$blocks[$name])?self::$blocks[$name]:$default;
     }
+    
+    public function get($name) {
+        return $this->app->get($name);
+    }
 
     public function extend($path, $params = array())
     {
-
         $template = $this;
         extract($params);
 

@@ -51,7 +51,8 @@ class Template
         echo isset(self::$blocks[$name])?self::$blocks[$name]:$default;
     }
     
-    public function get($name) {
+    public function get($name) 
+    {
         return $this->app->get($name);
     }
 

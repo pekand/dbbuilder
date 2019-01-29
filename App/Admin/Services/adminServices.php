@@ -18,7 +18,13 @@ $services->add('db', function($app){
 });
 
 $services->add('mysql', function($app) {
-    $mysql = new MySQL("127.0.0.1", "root", "", "");
+    $config = $app->get('config');
+    $mysql = new MySQL(
+        $config->get('mysql.host'), 
+        $config->get('mysql.username'), 
+        $config->get('mysql.password'), 
+        $config->get('mysql.dbname')
+    );
     return $mysql;
 });
 

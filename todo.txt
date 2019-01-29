@@ -1,3 +1,7 @@
-pridat nacitavanie konfiguracie
 pridat rekurzivne prechadzanie modulov pre App adresar
-pridat do templatov moznost vytahovat servisi
+pridat ukladanie db queries do databazi
+pridat logovanie do suboru
+pridat preklady
+pridat validator
+add fake cache to file or database
+add cache memcached or memcache or redis

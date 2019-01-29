@@ -7,7 +7,7 @@ $router->get("/admin/db/console", function($app){
 
 	$result = null;
 	if (!empty($query)) {
-		$result = (new DbConsole())->processQuery($database, $query);
+		$result = $app->get('dbconsole')->processQuery($database, $query);
 	}
 		
 	return $app->get('template')->render(

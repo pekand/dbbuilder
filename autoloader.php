@@ -12,6 +12,7 @@ class Autoloader {
             }
         } else {
             echo "Class not found! : ".$className;
+            var_dump(( new \Exception)->getTraceAsString());
             die();
         }
         return false;

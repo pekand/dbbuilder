@@ -63,6 +63,38 @@
 					"notnull" : 1
 				}
 			]
+		},
+		{
+			"name" : "cache",
+			"columns" : [
+				{
+					"name" : "id",	
+					"type" : "INT",
+					"autoincrement" : 1,
+					"notnull" : 1,
+					"primary" : 1
+				},
+				{
+					"name" : "uid",					
+					"type" : "CHAR(255)",
+					"notnull" : 1,
+					"index" : 1
+				},
+				{
+					"name" : "ctime",					
+					"type" : "CHAR(255)"
+				},
+				{
+					"name" : "name",					
+					"type" : "CHAR(255)",
+					"notnull" : 1
+				},
+				{
+					"name" : "data",					
+					"type" : "TEXT",
+					"notnull" : 0
+				}
+			]
 		}
 	]
 }

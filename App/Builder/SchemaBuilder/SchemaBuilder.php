@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Db;
+namespace Builder\SchemaBuilder;
 
 class SchemaBuilder
 {

@@ -10,13 +10,7 @@ class UserManager {
     }
 
 	public function init() {
-        $this->db->drop('users');
-		$this->db->create('users');
-		$this->db->addColumn('users', 'uid', 'CHAR(255)', 'not null default ""');
-		$this->db->addColumn('users', 'username', 'CHAR(255)', '');
-		$this->db->addColumn('users', 'password', 'CHAR(255)', '');
-		$this->db->addColumn('users', 'roles', 'CHAR(255)', '');
-		$this->db->addColumn('users', 'rights', 'CHAR(255)', '');
+
     }
 
 	public function create($username, $password, $roles = [], $rights = []) {

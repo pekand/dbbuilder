@@ -5,7 +5,7 @@
 // update database with schema
 $router->get("/admin/db/builder", function($app) {
 	echo "<pre>";
-	$schem = $app->get('schemabuilder');
+	$schema = $app->get('schemabuilder');
 	$schema->build();
 
 	$db = $app->get('db');

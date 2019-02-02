@@ -1,7 +1,12 @@
-pridat rekurzivne prechadzanie modulov pre App adresar
-pridat ukladanie db queries do databazi
-pridat logovanie do suboru
-pridat preklady
-pridat validator
-add fake cache to file or database
-add cache memcached or memcache or redis
+DONE add table for caching
+TODO add fake cache to file or database
+TODO add cache memcached or memcache or redis
+TODO pridat rekurzivne prechadzanie modulov pre App adresar
+TODO pridat ukladanie db queries do databazi
+TODO pridat logovanie do suboru
+TODO pridat validator
+TODO pridat preklady
+TODO problem with create users table with builder
+
+http://dbbuilder.loc/admin/db/list
+http://dbbuilder.loc/admin/db/builder

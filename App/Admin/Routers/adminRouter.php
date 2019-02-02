@@ -3,7 +3,7 @@
 use Core\Db\SchemaBuilder;
 
 // create test table
-$router->get("/admin/db/test", function($app){
+$router->get("/admin/db/test", function($app) {
 
 	$db = $app->get('db');
 
@@ -29,6 +29,37 @@ $router->get("/admin/db/user", function($app) {
 
 	$db = $app->get('db');
 	var_dump($db->list());
+	
+    
+	
+});
+
+$router->get("/admin/db/users/drop", function($app) {
+	$db = $app->get('db');
+	$db->drop('users');
+	$db->create('users');
+	$db->addColumn('users', 'uid', 'CHAR(255)', 'not null default ""');
+	$db->addColumn('users', 'username', 'CHAR(255)', '');
+	$db->addColumn('users', 'password', 'CHAR(255)', '');
+	$db->addColumn('users', 'roles', 'CHAR(255)', '');
+	$db->addColumn('users', 'rights', 'CHAR(255)', '');
+});
+
+$router->get("/admin/db/user/root", function($app) {
+
+	$db = $app->get('db');
+	var_dump($db->list());
+	var_dump($db->schema());
+	
+	// drop and recreate users table
+	$userManager = $app->get('userManager');	
+
+	// create new user
+	$auth = $app->get('auth');
+	$auth->createUser('root', 'password', ['admin'], ['all']);
+	
+	// list table users
+	
 });
 
 $router->get("/admin/db/auth", function($app) {

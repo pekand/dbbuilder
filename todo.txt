@@ -1,4 +1,3 @@
-DONE add table for caching
 TODO add fake cache to file or database
 TODO add cache memcached or memcache or redis
 TODO pridat rekurzivne prechadzanie modulov pre App adresar
@@ -10,3 +9,6 @@ TODO problem with create users table with builder
 
 http://dbbuilder.loc/admin/db/list
 http://dbbuilder.loc/admin/db/builder
+
+# vytiahni debug info from header
+https://www.yukei.net/2016/01/getting-response-headers-data-from-an-ajax-request-with-jquery/

@@ -4,7 +4,7 @@ class Autoloader {
     static public function loader($className) {
 
         try {
-            $filename = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR.'App'.DIRECTORY_SEPARATOR. str_replace("\\", DIRECTORY_SEPARATOR, $className) . ".php";
+            $filename = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR.'Modules'.DIRECTORY_SEPARATOR. str_replace("\\", DIRECTORY_SEPARATOR, $className) . ".php";
 
             if (file_exists($filename)) {
                 require_once($filename);

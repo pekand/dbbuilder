@@ -130,13 +130,28 @@ class Sqlite {
         return $this->get("SELECT * FROM `{$table}`;");
     }
 
-    public function list() {
+    public function tables() {
         $tables = $this->get("SELECT name FROM sqlite_master WHERE type='table';");
 
-        $data = [];
+        $tableNames = [];
         foreach ($tables as $table) {
-            $content = $this->get("SELECT * FROM ".$table['name']);
-            $data[$table['name']] = $content;
+            if($table['name'] == 'sqlite_sequence') {
+                continue;
+            }
+            
+            $tableNames[] = $table['name'];            
+        }
+        
+        return $tableNames;
+    }
+    
+    public function list() {
+        $tableNames = $this->tables();
+
+        $data = [];
+        foreach ($tableNames as $table) {
+            $content = $this->get("SELECT * FROM ".$table);
+            $data[$table] = $content;
         }
         return $data;
     }

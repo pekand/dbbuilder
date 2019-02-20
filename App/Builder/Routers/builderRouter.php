@@ -25,3 +25,16 @@ $router->get("/admin/db/query", function($app) {
 
 	return "";
 });
+
+$router->get("/admin/db/drop-all", function($app) {
+	echo "<pre>";
+	$db = $app->get('db');
+	$tables = $db->tables();
+	dump($tables);
+	
+	foreach($tables as $table) {
+		$db->drop('users');
+	}
+
+	return "";
+});

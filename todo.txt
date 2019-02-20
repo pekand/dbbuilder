@@ -1,8 +1,13 @@
+TODO opravit generovanie databzi
+TODO generovanie databazi do mysql
+
+
 TODO add fake cache to file or database
 TODO add cache memcached or memcache or redis
 TODO pridat rekurzivne prechadzanie modulov pre App adresar
 TODO pridat ukladanie db queries do databazi
 TODO pridat logovanie do suboru
+
 TODO pridat validator
 TODO pridat preklady
 TODO problem with create users table with builder

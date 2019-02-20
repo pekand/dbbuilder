@@ -9,7 +9,7 @@ $router->get("/admin/info/phpinfo", function($app){
 });
 
 $router->get("/admin/info/routes", function($app){	
-	$routes = $app->services->get('router')->getAllRoutes();
+	$routes = $app->router->getAllRoutes();
 	
 	var_dump($routes);
 });

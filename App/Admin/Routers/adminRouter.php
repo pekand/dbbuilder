@@ -57,9 +57,6 @@ $router->get("/admin/db/user/root", function($app) {
 	// create new user
 	$auth = $app->get('auth');
 	$auth->createUser('root', 'password', ['admin'], ['all']);
-	
-	// list table users
-	
 });
 
 $router->get("/admin/db/auth", function($app) {
@@ -97,6 +94,8 @@ $router->get("/admin/db/auth", function($app) {
 $router->get("/admin/db/list", function($app) {
 	echo "<pre>";
 	$db = $app->get('db');
-	print_r($db->list());
+	print_r($db->list());		
+	print_r($db->schema());		
+	print_r($db->definitions());
 });
 

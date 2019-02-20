@@ -17,3 +17,6 @@ http://dbbuilder.loc/admin/db/builder
 
 # vytiahni debug info from header
 https://www.yukei.net/2016/01/getting-response-headers-data-from-an-ajax-request-with-jquery/
+
+
+TODO vygenerovat zoznam vsetkych url a popis knemu > popisky sa zoberu z anaotacii

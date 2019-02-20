@@ -15,17 +15,6 @@ $router->get("/admin/db/builder", function($app) {
 	return "";
 });
 
-// query
-$router->get("/admin/db/query", function($app) {
-	echo "<pre>";
-	$db = $app->get('db');
-	print_r($db->list());		
-	print_r($db->schema());		
-	print_r($db->definitions());
-
-	return "";
-});
-
 $router->get("/admin/db/drop-all", function($app) {
 	echo "<pre>";
 	$db = $app->get('db');

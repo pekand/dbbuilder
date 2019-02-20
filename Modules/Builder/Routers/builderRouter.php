@@ -19,7 +19,6 @@ $router->get("/admin/db/drop-all", function($app) {
 	echo "<pre>";
 	$db = $app->get('db');
 	$tables = $db->tables();
-	dump($tables);
 	
 	foreach($tables as $table) {
 		$db->drop($table);

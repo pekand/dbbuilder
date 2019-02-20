@@ -231,7 +231,6 @@ class SchemaBuilder
 		}
 
 		foreach ($query as $command) {
-			var_dump($command);
 			$this->db->exec($command);
 		}
 		

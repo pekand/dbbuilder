@@ -18,7 +18,6 @@ class Temp
     
     public function set($name, $value) {
         $filename = $this->getFileName($name);
-        dump($filename);
         file_put_contents($filename, $value);
     }
     

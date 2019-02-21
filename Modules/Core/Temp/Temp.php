@@ -16,13 +16,27 @@ class Temp
         return $this->tempPath.md5($name).'.tmp';
     }
     
+    public function exists($name) {
+        $filename = $this->getFileName($name);
+        if (file_exists($filename)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
     public function set($name, $value) {
         $filename = $this->getFileName($name);
         
         $filenameSav = $filename.'.sav';
         
+        
         if (file_exists($filenameSav)) {
-           return false; 
+           $fileAge = time()-filemtime($filenameSav);
+           
+           if ($fileAge <  10 * 60 ) { // check if file is older then 10 minutes
+                return false; 
+           }
         }
         
         file_put_contents($filenameSav, $value);
@@ -46,7 +60,11 @@ class Temp
     }
     
     public function remove($name) {
+        $filename = $this->getFileName($name);
         
+        if (file_exists($filename)) {
+            unlink($filename);
+        }
     }
     
     public function clear() {

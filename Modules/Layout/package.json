@@ -9,14 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gulp": "*",
-    "requirejs": "*",
     "bootstrap": "*",
-    "modernizr": "*",
-    "moment": "*",
     "font-awesome": "*",
+    "gulp": "*",
     "jquery": "*",
-    "jquery-ui": "*"
+    "jquery-ui": "*",
+    "modernizr": "^3.7.0",
+    "moment": "*",
+    "requirejs": "*"
   },
   "devDependencies": {
     "bootstrap-sass": "*",

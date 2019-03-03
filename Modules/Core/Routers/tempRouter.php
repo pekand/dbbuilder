@@ -8,7 +8,7 @@ $router->get("/admin/temp/clear", function($app) {
 
 	dump($temp->get('abc'));
 
-	$temp->clear();
+	//$temp->clear();
 
 	return "done";
 });

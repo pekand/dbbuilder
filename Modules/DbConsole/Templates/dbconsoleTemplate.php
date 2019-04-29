@@ -28,7 +28,7 @@
 		history.pushState({},"",'?database='+database+'&query='+query);
 		
 	    $.ajax({
-	        url : "/admin/db/console/query",
+	        url : "/admin/dbconsole/query",
 	        type: "POST",
 	        data : formData,
 	        success: function(data, textStatus, jqXHR)
@@ -49,7 +49,7 @@
 <main role="main" class="container">
       <h1 class="mt-5">DbConsole</h1>
       <section>
-		<form id="dbconsole__form" method="POST" action="/admin/db/console/query">
+		<form id="dbconsole__form" method="POST" action="/admin/dbconsole/query">
 			
 		  <div class="form-group">
 		    <label for="exampleFormControlInput1">Database</label>

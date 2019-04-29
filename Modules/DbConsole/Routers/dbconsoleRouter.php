@@ -1,7 +1,11 @@
 <?php
 
+/*
+	mysql console
+*/
+
 // render template dbconsole
-$router->get("/admin/db/console", function($app){
+$router->get("/admin/dbconsole", function($app){
 	$database = $app->get('request')->get('database');
 	$query = $app->get('request')->get('query');
 
@@ -21,7 +25,7 @@ $router->get("/admin/db/console", function($app){
 });
 
 // execute query in database
-$router->post("/admin/db/console/query", function($app){
+$router->post("/admin/dbconsole/query", function($app){
 	$database = $app->get('request')->post('database');
 	$query = $app->get('request')->post('query');
 

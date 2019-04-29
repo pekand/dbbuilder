@@ -1,0 +1,15 @@
+[] query log in debug mode
+[] create log file
+  [] set destination for log file
+[] add console for sqlite
+  [] copy mysql console to sconsole
+[] create db viewer
+   [] list tables
+   	 [] add ajax pagination
+   [] list table after click
+   [] drop table y/n question
+   [] drop item from table
+   [] add item to table
+     [] list columns in table
+   [] edit item from table
+   [] update item from table

@@ -53,7 +53,7 @@ class Sqlite {
     }
 
     public function create($table) {
-        $query ="CREATE TABLE IF NOT EXISTS `$table` ( id integer PRIMARY KEY AUTOINCREMENT NOT NULL );";
+        $query ="CREATE TABLE IF NOT EXISTS `$table` ( id integer PRIMARY KEY AUTOINCREMENT NOT NULL, uid CHAR(255) NOT NULL UNIQUE);";
 
         $this->exec($query);
     }
@@ -73,6 +73,8 @@ class Sqlite {
 
     public function insert($table, $data = array()) {
 
+        $data['uid'] = $this->uid();
+
         $columnNames = implode(",", array_keys($data));
         $columnValues = implode(",", array_map(function($value) { return ':'.$value; }, array_keys($data)));
 
@@ -80,22 +82,24 @@ class Sqlite {
 
         $this->exec($query, $data);
 
-        return $this->db->lastInsertRowID();
+        return $data['uid'];
     }
 
-    public function update($table, $id, $data = array()) {
+    public function update($table, $uid, $data = array()) {
 
         $columnValues = implode(",", array_map(function($value) { return $value.' = :'.$value; }, array_keys($data)));
 
-        $query ="UPDATE `$table` SET {$columnValues} WHERE id=:id;";
+        $query ="UPDATE `$table` SET {$columnValues} WHERE uid=:uid;";
+
+        $data['uid'] = $uid;
 
         $this->exec($query, $data);
     }
 
-    public function delete($table, $id) {
-        $query = "DELETE FROM `$table` WHERE id=:id;";
+    public function delete($table, $uid) {
+        $query = "DELETE FROM `$table` WHERE uid=:uid;";
 
-        $this->exec($query, array('id' => $id));
+        $this->exec($query, array('uid' => $uid));
     }
 
     public function drop($table) {
@@ -117,9 +121,6 @@ class Sqlite {
         }
         
         return $data;
-        
-        
-        
     }
     
     public function definitions() {

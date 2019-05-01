@@ -1,0 +1,50 @@
+
+.editform {
+	margin-top:20px;
+}
+
+.editform__item {
+  margin:0px;
+  padding:0px;
+  border-radius: 25px;
+}
+
+.editform__input {
+  margin:0px;
+  padding:0px;
+  border-radius: 25px;
+}
+
+.editform__item__label {
+  width: 25%;
+  height: 100%;
+  margin:10px;
+  padding:10px;
+  background-color:#ebebe0;
+  border-radius: 25px;
+  float:left;
+  text-align:center;
+}
+
+
+.editform__item__input {
+	margin:10px;
+    padding:10px;
+    background-color:#ccddff;
+    border-radius: 25px;
+	float:left;
+	width: 70%;
+}
+
+.editform__item__input textarea{
+    width: 100%;
+	border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    background-color:#ccddff;
+}

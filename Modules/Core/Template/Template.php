@@ -34,6 +34,11 @@ class Template
         return null;
     }
 
+    public function put($string)
+    {
+        echo htmlspecialchars($string);     
+    }
+
     public function blockStart($name)
     {
         self::$blocks[$name] = "";

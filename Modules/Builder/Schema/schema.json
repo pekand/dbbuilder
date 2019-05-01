@@ -95,6 +95,34 @@
 					"notnull" : 0
 				}
 			]
+		},
+		{
+			"name" : "test",
+			"columns" : [
+				{
+					"name" : "id",	
+					"type" : "INTEGER",
+					"autoincrement" : 1,
+					"notnull" : 1,
+					"primary" : 1
+				},
+				{
+					"name" : "uid",					
+					"type" : "CHAR(255)",
+					"notnull" : 1,
+					"index" : 1
+				},
+				{
+					"name" : "name",					
+					"type" : "CHAR(255)",
+					"notnull" : 1
+				},
+				{
+					"name" : "body",					
+					"type" : "TEXT",
+					"notnull" : 0
+				}
+			]
 		}
 	]
 }

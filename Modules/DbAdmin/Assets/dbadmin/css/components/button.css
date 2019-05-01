@@ -1,0 +1,13 @@
+.button {
+  margin:10px;
+  margin-right:0px;
+  padding:10px;
+  background-color:#b8f7b7;
+  border-radius: 25px;
+  float:left;
+}
+
+.button--remove {
+  background-color:#f7b7b7;
+  float:right;
+}

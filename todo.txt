@@ -1,8 +1,13 @@
+core
 [] caching elements
 [] recursivly search for modules
 [] query log in debug mode
 [] create log file
   [] set destination for log file
+[] minification  
+  [] minification css
+  [] minification js
+    [] 
 
 dbadmin
 [] add console for sqlite
@@ -18,7 +23,7 @@ dbadmin
    [x] edit item from table
    [x] update item from table
    
-[] soap call
+request tester
   [] template for soap
   [] send request 
   [] get response

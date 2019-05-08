@@ -4,7 +4,7 @@ use Core\Db\SchemaBuilder;
 use Core\Router\JsonResponse;
 
 // list tables
-$router->get("/admin/dbadmin/tables", function($app) {
+$router->get("/admin/dbadmin", function($app) {
     $db = $app->get('db');      
 
     return $app->get('template')->render(

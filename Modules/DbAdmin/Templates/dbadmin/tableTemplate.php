@@ -28,7 +28,7 @@ $this->blockStart("body");
       url:"/admin/dbadmin/table/"+table+"/drop",
       success: function(data, textStatus, jqXHR)
       {
-        window.location.href = '/admin/dbadmin/tables';
+        window.location.href = '/admin/dbadmin';
       }
     });
   }

@@ -22,6 +22,8 @@ dbadmin
      [x] list columns in table
    [x] edit item from table
    [x] update item from table
+[] run builder in safe mode
+  [] displey diference query   
    
 request tester
   [] template for soap

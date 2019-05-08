@@ -18,8 +18,7 @@ $router->middleware("/zone", function($app) {
 	}
 		
 	if(!$auth->is('admin') || !$auth->is('zone_user')) {
-		$page = $app->get('template');
-		return $page->render("login", []);
+		return $app->get('template')->render("login", []);
 	}
 	
 	return true;

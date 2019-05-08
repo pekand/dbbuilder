@@ -18,8 +18,7 @@ $router->middleware("/admin", function($app){
 	}
 		
 	if(!$auth->is('admin')) {
-		$page = $app->get('template');
-		return $page->render("login", []);
+		return $app->get('template')->render("login", []);
 	}
 	
 	return true;

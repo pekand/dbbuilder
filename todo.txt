@@ -1,7 +1,10 @@
 [] caching elements
+[] recursivly search for modules
 [] query log in debug mode
 [] create log file
   [] set destination for log file
+
+dbadmin
 [] add console for sqlite
   [] copy mysql console to sconsole
 [x] create db viewer
@@ -14,6 +17,7 @@
      [x] list columns in table
    [x] edit item from table
    [x] update item from table
+   
 [] soap call
   [] template for soap
   [] send request 

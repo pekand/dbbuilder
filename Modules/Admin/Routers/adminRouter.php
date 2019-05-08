@@ -29,9 +29,6 @@ $router->get("/admin/db/user", function($app) {
 
     $db = $app->get('db');
     var_dump($db->list());
-    
-    
-    
 });
 
 $router->get("/admin/db/users/drop", function($app) {
@@ -48,9 +45,7 @@ $router->get("/admin/db/users/drop", function($app) {
 $router->get("/admin/db/user/add/root", function($app) {
 
     $db = $app->get('db');
-    var_dump($db->list());
-    var_dump($db->schema());
-    
+       
     // create new user
     $app->get('auth')->createUser('root', 'password', ['admin'], ['all']);
 });

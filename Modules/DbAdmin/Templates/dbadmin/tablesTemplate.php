@@ -11,11 +11,24 @@ $this->blockStart("body");
 
   function tablelistRowClick()
   {
-    //alert($(this).data('tablename'));
+    var table = $(this).data('tablename');
+    window.location.href = '/admin/dbadmin/table/'+table;
   }
-
+  
+  function build()
+  {
+    window.location.href = '/admin/db/builder';
+  }
+  
+  function schema()
+  {
+    window.location.href = '/admin/dbadmin/schema';
+  }
+  
   function init()
   {
+    $('#build').click(build);
+    $('#schema').click(schema);
     $('.tablelist__row').click(tablelistRowClick);
   }
 
@@ -26,19 +39,19 @@ $this->blockStart("body");
 <section class="container">
 
     <div class="toolbar">
-      <div id="new" class="button">New</div>
+      <div id="build" class="button">Build</div>
       <div id="schema" class="button">Schema</div>
       <div class="clear"></div>
     </div>
 
     <div class="tablelist">
     <?php foreach($tables as $tableName => $table) { ?>
-    <a href="/admin/dbadmin/table/<?php $this->put($tableName); ?>">
-    <div class="tablelist__row" data-tablename="<?php $this->put($tableName); ?>">
-      <?php $this->put($tableName); ?>
-    </div>
-  </a>
-  <?php }; ?>
+      
+      <div class="tablelist__row" data-tablename="<?php $this->put($tableName); ?>">
+        <?php $this->put($tableName); ?>
+      </div>
+
+    <?php }; ?>
   </div>
 </section>
 

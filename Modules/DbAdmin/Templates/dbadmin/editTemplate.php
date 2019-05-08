@@ -27,23 +27,38 @@ $this->blockStart("body");
 
     console.log(formData);
 
+    var url = "/admin/dbadmin/table/"+table+"/new";
+    if (uid !== "") {
+      url = "/admin/dbadmin/table/"+table+"/update/"+uid;
+    }        
+    
     $.post({
-        url : "/admin/dbadmin/table/"+table+"/update/"+uid,
+        url : url,
         data : formData,
         success: function(data, textStatus, jqXHR)
         {
-            console.log('ok');
+          if (uid === '') {
+            uid = data['uid'];
+            window.history.replaceState({},"Edit", '/admin/dbadmin/table/'+table+'/edit/'+uid);
+          }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
             console.log('error');
         }
     });
+    
   }
 
   function remove()
   {
-    $.get("/admin/dbadmin/table/"+table+"/remove/"+uid);
+    $.get({
+      url:"/admin/dbadmin/table/"+table+"/remove/"+uid,
+      success: function(data, textStatus, jqXHR)
+      {
+        window.location.href = '/admin/dbadmin/table/' + table;
+      }
+    });
   }
 
   function init()

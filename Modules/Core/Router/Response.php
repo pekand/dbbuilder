@@ -3,7 +3,12 @@
 namespace Core\Router;
 
 class Response { 
-	public function __construct() {
-        
+	$data = "";
+	public function __construct($data) {
+        $this->$data = $data;
+    }
+    
+    public function render() {
+    	echo $this->$data;
     }
 }

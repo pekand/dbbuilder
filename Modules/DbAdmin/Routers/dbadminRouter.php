@@ -1,13 +1,14 @@
 <?php
 
 use Core\Db\SchemaBuilder;
+use Core\Router\JsonResponse;
 
 // list tables
 $router->get("/admin/dbadmin/tables", function($app) {
     $db = $app->get('db');      
 
     return $app->get('template')->render(
-		"tables", 
+		"dbadmin/tables", 
 		[
 			'tables' => $db->schema(),
 		]
@@ -21,7 +22,7 @@ $router->get("/admin/dbadmin/table/:table", function($app, $table) {
     $data = $db->get("SELECT * FROM {$table};");
 
     return $app->get('template')->render(
-		"table", 
+		"dbadmin/table", 
 		[
 			'table' => $table,
 			'data' => $data,
@@ -48,27 +49,53 @@ $router->get("/admin/dbadmin/table/:table/edit/:uid", function($app, $table, $ui
     $db = $app->get('db');
 
     $data = $db->get("SELECT * FROM {$table} where uid = :uid;", ['uid'=>$uid]);
-
-    unset($data[0]['id']);
-	unset($data[0]['uid']);
+    
+	if (isset($data[0])) {
+		$data = $data[0];
+	    unset($data['id']);
+		unset($data['uid']);
+	}
 
     return $app->get('template')->render(
-		"edit", 
+		"dbadmin/edit", 
 		[
 			'table' => $table,
 			'uid' => $uid ,
-			'data' => $data[0] ,
+			'data' => $data,
+		]
+	);
+});
+
+// new column
+$router->get("/admin/dbadmin/table/:table/new", function($app, $table) {
+    $db = $app->get('db');
+
+    $data = $db->tableColumns($table);
+
+    unset($data['id']);
+	unset($data['uid']);
+	
+	foreach($data as &$value) {
+		$value = '';
+	}
+
+    return $app->get('template')->render(
+		"dbadmin/edit", 
+		[
+			'table' => $table,
+			'uid' => '' ,
+			'data' => $data,
 		]
 	);
 });
 
 // proces login form
-$router->post("/admin/dbadmin/table/:table/new", function($app, $table, $uid) {
+$router->post("/admin/dbadmin/table/:table/new", function($app, $table) {
 	$db = $app->get('db');
 
 	$uid = $db->insert($table, $_POST);	
 
-	echo $uid;
+	return new JsonResponse(['uid'=>$uid]);
 });
 
 // proces login form
@@ -85,12 +112,16 @@ $router->get("/admin/dbadmin/table/:table/remove/:uid", function($app, $table, $
 	$db->delete($table, $uid);	
 });
 
-$router->get("/admin/test", function($app) {
-    $db = $app->get('db');
 
-	$db->insert('test', [
-		'name' => 'xxx',
-		'body' => 'yyy',
-	]);
+// proces login form
+$router->get("/admin/dbadmin/schema", function($app) {
+	$db = $app->get('db');
+	$schema = $db->schema();
+	
+	return $app->get('template')->render(
+		"dbadmin/schema", 
+		[
+			'schema' => $schema
+		]
+	);
 });
-

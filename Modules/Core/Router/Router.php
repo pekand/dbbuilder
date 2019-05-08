@@ -44,6 +44,7 @@ class Router {
 
         if(is_object($content) && method_exists($content, 'render')) {
             echo $content->render();
+            return;
         }
 
         echo $content;        

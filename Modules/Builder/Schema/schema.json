@@ -97,7 +97,7 @@
 			]
 		},
 		{
-			"name" : "test",
+			"name" : "urls",
 			"columns" : [
 				{
 					"name" : "id",	
@@ -111,6 +111,15 @@
 					"type" : "CHAR(255)",
 					"notnull" : 1,
 					"index" : 1
+				},
+				{
+					"name" : "ctime",					
+					"type" : "CHAR(255)"
+				},
+				{
+					"name" : "counter",	
+					"type" : "INTEGER",
+					"default" : 0
 				},
 				{
 					"name" : "name",					

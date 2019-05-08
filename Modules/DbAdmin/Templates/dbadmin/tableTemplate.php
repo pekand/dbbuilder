@@ -9,14 +9,35 @@ $this->blockStart("body");
 
 <script>
 
+  var table = '<?php $this->put($table); ?>';
+  
   function tablelistRowClick()
   {
-    alert($(this).data('tablename'));
+    var uid = $(this).data('uid');
+    window.location.href = '/admin/dbadmin/table/'+table+'/edit/'+uid;
+  }
+  
+  function tablelistNewClick()
+  {
+    window.location.href = '/admin/dbadmin/table/'+table+'/new';
+  }
+  
+  function tablelistDropClick()
+  {
+    $.get({
+      url:"/admin/dbadmin/table/"+table+"/drop",
+      success: function(data, textStatus, jqXHR)
+      {
+        window.location.href = '/admin/dbadmin/tables';
+      }
+    });
   }
 
   function init()
   {
-    $('.tablelist__row').click(tablelistRowClick);
+    $('.table__row').click(tablelistRowClick);
+    $('#new').click(tablelistNewClick);
+    $('#drop').click(tablelistDropClick);
   }
 
   $(init);
@@ -27,14 +48,15 @@ $this->blockStart("body");
 
   <div class="toolbar">
     <div id="new" class="button">New</div>
+    <div id="drop" class="button button--remove">Drop</div>
     <div class="clear"></div>
   </div>
 
   <div class="table">
     <?php foreach($data as $row) { ?>
     
-      <a href="/admin/dbadmin/table/<?php $this->put($table); ?>/edit/<?php $this->put($row['uid']); ?>">
-      <div class="table__row" data-tablename="<?php $this->put($table); ?>">
+
+      <div class="table__row" data-uid="<?php $this->put($row['uid']); ?>">
         <?php foreach($row as $name => $column) { ?>
           
             <div class="table__column" title="<?php $this->put($name); ?>" data-column="<?php $this->put($name); ?>">
@@ -47,7 +69,6 @@ $this->blockStart("body");
         <div class="clear"></div>
 
       </div>
-      </a>
     
     <?php }; ?>
   </div>

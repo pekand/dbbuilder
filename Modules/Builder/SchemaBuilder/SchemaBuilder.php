@@ -32,6 +32,10 @@ class SchemaBuilder
 					$query .= " NOT NULL";
 				}
 				
+				if (isset($value['default'])) {
+					$query .= " DEFAULT '".$value['default']."'";
+				}
+				
 				if(--$i>0)$query .= ", ";
 			}
 
@@ -58,8 +62,14 @@ class SchemaBuilder
 	 	if (isset($column['autoincrement']) && $column['autoincrement'] == 1) {
 			$autoincrement = " AUTOINCREMENT";
 		}
+		
+		$default = "";
+		if (isset($column['default'])) {
+			$default = " DEFAULT '".$column['default']."'";
+		}
 
-        $query =  "ALTER TABLE `{$tableName}` ADD COLUMN ".$column['name']." {$type} {$primary} {$notnull} {$autoincrement};";
+        $query =  "ALTER TABLE `{$tableName}` ADD COLUMN ".$column['name']." {$type} {$primary} {$notnull} {$autoincrement} {$default};";
+
         return $query;
     } 
 

@@ -10,4 +10,5 @@
 .button--remove {
   background-color:#f7b7b7;
   float:right;
+  margin-right:10px;
 }

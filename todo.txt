@@ -1,15 +1,24 @@
+[] caching elements
 [] query log in debug mode
 [] create log file
   [] set destination for log file
 [] add console for sqlite
   [] copy mysql console to sconsole
-[] create db viewer
-   [] list tables
+[x] create db viewer
+   [x] list tables
    	 [] add ajax pagination
-   [] list table after click
+   [x] list table after click
    [] drop table y/n question
-   [] drop item from table
-   [] add item to table
-     [] list columns in table
-   [] edit item from table
-   [] update item from table
+   [x] drop item from table
+   [x] add item to table
+     [x] list columns in table
+   [x] edit item from table
+   [x] update item from table
+[] soap call
+  [] template for soap
+  [] send request 
+  [] get response
+  [] save to list
+  [] displey items
+  [] repeat request 
+  [] save request as new item

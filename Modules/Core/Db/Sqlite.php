@@ -105,6 +105,19 @@ class Sqlite {
     public function drop($table) {
         $this->exec("DROP TABLE IF EXISTS `$table`;");
     }
+    
+    public function tableColumns($table) {
+        
+        $result = [];
+        
+        $columns = $this->get("PRAGMA table_info(`$table`)");
+
+        foreach ($columns as $value) {
+            $result[$value['name']]  = $value['name'];
+        }
+        
+        return $result;
+    }
 
     public function schema() {
         $tables = $this->get("SELECT name FROM sqlite_master WHERE type='table';");

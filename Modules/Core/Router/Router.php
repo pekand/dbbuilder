@@ -115,20 +115,20 @@ class Router {
                 }
             }
         }
-
+        
         // move default to bottom
-        foreach ($this->routes as &$route) {
-           $route['uri'] = str_replace('*','~',$route['uri']);
+        foreach ($this->routes as $key => $route) {
+           $this->routes[$key]['uri'] = str_replace('*','~',$this->routes[$key]['uri']);
         }
         
         usort($this->routes,  function ($a, $b) {
             return strcmp($a['uri'], $b['uri']);
         });
 
-        foreach ($this->routes as &$route) {
-           $route['uri'] = str_replace('~','*',$route['uri']);
+        foreach ($this->routes as $key => $route) {
+           $this->routes[$key]['uri'] = str_replace('~','*',$this->routes[$key]['uri']);
         }
-
+        
         foreach ($this->routes as $route) {
             if ($method != $route['method']) continue;
             $uri_pattern = str_replace('/', '\/', $route['uri']);

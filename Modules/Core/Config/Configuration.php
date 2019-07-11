@@ -57,7 +57,7 @@ class Configuration
         $app = $this->app;
         $config = $this;
 
-        foreach (array_filter(glob(ROOT_PATH . '/Modules/*'), 'is_dir') as $module) {
+        foreach ($app->getModulesPaths()  as $module) {
             $path = $module . '/Config/*Config.php';
 
             foreach (glob($path) as $configFile) {

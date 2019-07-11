@@ -3,7 +3,7 @@
 // render assets file
 $router->get("/assets/*", function($app, $path){   
     $found = false;
-    foreach (array_filter(glob(ROOT_PATH . '/Modules/*'), 'is_dir') as $module) {
+    foreach ($app->getModulesPaths() as $module) {
         $assetsPath = $module . '/Assets/';
         $filepath = $assetsPath.$path;
 

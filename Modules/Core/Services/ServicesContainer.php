@@ -24,7 +24,8 @@ class ServicesContainer
     
     public function get($name) {
         if(!isset(($this->services[$name]))) {
-            return null;
+            throw new Exception("Service '".$name."' not found");
+            
         }
 
         if(!empty($this->services[$name]['object'])) {
@@ -32,7 +33,7 @@ class ServicesContainer
         }
 
         if(empty($this->services[$name]['callback'])) {
-            return null;
+            throw new Exception("Service '".$name."' is not callable");
         }
 
         $result = call_user_func_array($this->services[$name]['callback'], [$this->app]);
@@ -46,7 +47,7 @@ class ServicesContainer
         $app = $this->app;
         $services = $this->app->services;
 
-        foreach (array_filter(glob(ROOT_PATH . '/Modules/*'), 'is_dir') as $module) {
+        foreach ($app->getModulesPaths() as $module) {
             $path = $module . '/Services/*Services.php';
 
             foreach (glob($path) as $servicesFile) {

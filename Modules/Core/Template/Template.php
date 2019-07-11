@@ -19,7 +19,7 @@ class Template
         $template = $this;
         extract($params);
 
-        foreach (array_filter(glob(ROOT_PATH . '/Modules/*'), 'is_dir') as $module) {
+        foreach ($this->app->getModulesPaths() as $module) {
             $templateFile = $module . DIRECTORY_SEPARATOR . 'Templates' . DIRECTORY_SEPARATOR . $path . "Template.php";
 
             if (file_exists($templateFile)) {
